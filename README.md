@@ -1,11 +1,15 @@
 # LipActivityMeter
 
+![LipActivityMeter](docs/images/banner.svg)
+
 A standalone, zero-dependency browser tool that turns per-frame face landmark
 arrays into a "speaking likelihood" score per face.
 
 It performs **no camera capture and no landmark detection** — it only consumes
 landmark arrays that some other tool (a face tracker) provides. This makes it
 fully testable on its own with synthetic data, and reusable across projects.
+
+![Where this tool sits in a toolkit pipeline](docs/images/architecture.svg)
 
 ## How it works
 
@@ -20,9 +24,22 @@ using the MediaPipe Face Landmarker 478-point layout:
 - `13` / `14` — inner upper lip / inner lower lip (the mouth gap)
 - `10` / `152` — forehead / chin (used to normalize for face size/distance from camera)
 
+<p align="center">
+  <img src="docs/images/landmark-map.svg" alt="The four landmarks LipActivityMeter reads, with the mouthRatio formula" width="480">
+</p>
+
+As the mouth opens, the gap between landmarks 13/14 grows relative to face
+height, so `mouthRatio` grows with it:
+
+![mouthRatio for a closed mouth vs. an open mouth](docs/images/open-vs-closed.svg)
+
 `energy` is the rolling variance of `mouthRatio` over the last `windowSize`
 samples. A silent, closed mouth has a near-constant ratio and low variance; a
 talking mouth oscillates and produces much higher variance.
+
+![windowSize controls how much recent history feeds the variance calculation](docs/images/rolling-window.svg)
+
+![Talking mouthRatio oscillates and produces high energy; silent mouthRatio stays flat and produces low energy](docs/images/energy-variance-graph.svg)
 
 ## Install / run
 
@@ -92,6 +109,10 @@ Two live bars render at ~30fps showing each face's energy; Face A's bar
 dominates Face B's by well over 10x. A pause/resume button freezes both
 streams. This demo doubles as the visual sanity test for the scorer.
 
+<p align="center">
+  <img src="docs/images/demo-ui-preview.svg" alt="demo.html running, Face A's bar far outpacing Face B's" width="560">
+</p>
+
 To manually verify the edge-case handling, open the browser devtools console
 on the demo page (the meter instance is exposed as `window.meter`) and try:
 
@@ -99,6 +120,8 @@ on the demo page (the meter instance is exposed as `window.meter`) and try:
 meter.update('A', undefined, performance.now());
 meter.getEnergy('A'); // 0, no throw
 ```
+
+![Edge cases: malformed or missing input always resolves to 0, never throws](docs/images/edge-cases.svg)
 
 ## Composes with
 

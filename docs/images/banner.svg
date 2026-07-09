@@ -1,0 +1,23 @@
+<svg width="900" height="180" viewBox="0 0 900 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bannerBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#141a20"/>
+      <stop offset="100%" stop-color="#0d1116"/>
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3ddc84"/>
+      <stop offset="100%" stop-color="#4aa3ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="180" rx="14" fill="url(#bannerBg)" stroke="#2c353d" stroke-width="1.5"/>
+
+  <text x="40" y="76" font-family="system-ui, sans-serif" font-size="34" font-weight="700" fill="#e6e6e6">LipActivityMeter</text>
+  <text x="40" y="108" font-family="system-ui, sans-serif" font-size="15" fill="#9aa4ad">Lip-energy scoring from face landmarks &#8212; zero dependencies, no camera, no build step</text>
+
+  <g transform="translate(660,40)">
+    <circle cx="50" cy="50" r="48" fill="#161d24" stroke="#2c353d" stroke-width="1.5"/>
+    <path d="M 15 50 Q 25 20, 35 50 T 55 50 T 75 50 T 90 50"
+          fill="none" stroke="url(#waveGrad)" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="50" cy="72" rx="18" ry="7" fill="none" stroke="#4aa3ff" stroke-width="3"/>
+  </g>
+</svg>

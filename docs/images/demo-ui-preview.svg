@@ -1,0 +1,24 @@
+<svg width="700" height="360" viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg">
+  <rect width="700" height="360" rx="14" fill="#101418" stroke="#2c353d" stroke-width="1.5"/>
+
+  <text x="32" y="46" font-family="system-ui, sans-serif" font-size="19" fill="#e6e6e6" font-weight="700">LipActivityMeter &#8212; synthetic demo</text>
+  <text x="32" y="70" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4ad">Two synthetic faces, no camera. Bars show live rolling energy.</text>
+
+  <!-- Face A row -->
+  <text x="32" y="118" font-family="system-ui, sans-serif" font-size="14" fill="#e6e6e6">Face A &#8212; talking</text>
+  <text x="668" y="118" text-anchor="end" font-family="'Courier New', monospace" font-size="13" fill="#e6e6e6">0.002880</text>
+  <rect x="32" y="128" width="636" height="28" rx="6" fill="#1e252b" stroke="#2c353d" stroke-width="1"/>
+  <rect x="32" y="128" width="286" height="28" rx="6" fill="#3ddc84"/>
+
+  <!-- Face B row -->
+  <text x="32" y="196" font-family="system-ui, sans-serif" font-size="14" fill="#e6e6e6">Face B &#8212; silent</text>
+  <text x="668" y="196" text-anchor="end" font-family="'Courier New', monospace" font-size="13" fill="#e6e6e6">0.000005</text>
+  <rect x="32" y="206" width="636" height="28" rx="6" fill="#1e252b" stroke="#2c353d" stroke-width="1"/>
+  <rect x="32" y="206" width="1" height="28" rx="6" fill="#4aa3ff"/>
+
+  <!-- Pause button -->
+  <rect x="32" y="256" width="90" height="34" rx="6" fill="#2c353d" stroke="#3a444d" stroke-width="1"/>
+  <text x="77" y="278" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#e6e6e6">Pause</text>
+
+  <text x="32" y="330" font-family="system-ui, sans-serif" font-size="11" fill="#6b7680">Real values captured from a live browser run of demo.html &#8212; Face A scores ~576&#215; Face B.</text>
+</svg>

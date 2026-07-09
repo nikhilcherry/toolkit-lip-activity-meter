@@ -1,0 +1,36 @@
+<svg width="900" height="420" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="420" fill="#101418"/>
+  <text x="450" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e6e6e6" font-weight="700">Edge cases &#8212; update() never throws</text>
+
+  <!-- header row -->
+  <text x="60" y="70" font-family="system-ui, sans-serif" font-size="13" fill="#6b7680" font-weight="600">INPUT</text>
+  <text x="620" y="70" font-family="system-ui, sans-serif" font-size="13" fill="#6b7680" font-weight="600">RESULT</text>
+  <line x1="40" y1="82" x2="860" y2="82" stroke="#2c353d" stroke-width="1"/>
+
+  <!-- row 1 -->
+  <text x="60" y="118" font-family="'Courier New', monospace" font-size="14" fill="#e6e6e6">landmarks === undefined</text>
+  <rect x="600" y="98" width="220" height="32" rx="8" fill="#132018" stroke="#3ddc84" stroke-width="1.5"/>
+  <text x="710" y="120" text-anchor="middle" font-family="'Courier New', monospace" font-size="13" fill="#3ddc84">energy / ratio = 0</text>
+
+  <!-- row 2 -->
+  <text x="60" y="168" font-family="'Courier New', monospace" font-size="14" fill="#e6e6e6">landmarks shorter than expected</text>
+  <rect x="600" y="148" width="220" height="32" rx="8" fill="#132018" stroke="#3ddc84" stroke-width="1.5"/>
+  <text x="710" y="170" text-anchor="middle" font-family="'Courier New', monospace" font-size="13" fill="#3ddc84">energy / ratio = 0</text>
+
+  <!-- row 3 -->
+  <text x="60" y="218" font-family="'Courier New', monospace" font-size="14" fill="#e6e6e6">faceHeight &lt; minFaceHeight</text>
+  <rect x="600" y="198" width="220" height="32" rx="8" fill="#132018" stroke="#3ddc84" stroke-width="1.5"/>
+  <text x="710" y="220" text-anchor="middle" font-family="'Courier New', monospace" font-size="13" fill="#3ddc84">energy = 0</text>
+
+  <!-- row 4 -->
+  <text x="60" y="268" font-family="'Courier New', monospace" font-size="14" fill="#e6e6e6">unknown faceId (never updated)</text>
+  <rect x="600" y="248" width="220" height="32" rx="8" fill="#132018" stroke="#3ddc84" stroke-width="1.5"/>
+  <text x="710" y="270" text-anchor="middle" font-family="'Courier New', monospace" font-size="13" fill="#3ddc84">getEnergy/Ratio = 0</text>
+
+  <!-- row 5 -->
+  <text x="60" y="318" font-family="'Courier New', monospace" font-size="14" fill="#e6e6e6">face appears mid-session</text>
+  <rect x="600" y="298" width="220" height="32" rx="8" fill="#132018" stroke="#3ddc84" stroke-width="1.5"/>
+  <text x="710" y="320" text-anchor="middle" font-family="'Courier New', monospace" font-size="13" fill="#3ddc84">tracked from next update()</text>
+
+  <text x="450" y="380" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#6b7680">Verified live via devtools console against demo.html &#8212; see README "Demo" section.</text>
+</svg>

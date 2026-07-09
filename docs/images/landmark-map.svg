@@ -1,0 +1,38 @@
+<svg width="720" height="640" viewBox="0 0 720 640" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="640" fill="#101418"/>
+  <text x="360" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e6e6e6" font-weight="700">The 4 landmarks LipActivityMeter reads</text>
+  <text x="360" y="58" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4ad">MediaPipe Face Landmarker, 478-point layout — every other point is ignored</text>
+
+  <!-- face outline -->
+  <ellipse cx="300" cy="330" rx="140" ry="180" fill="#161d24" stroke="#2c353d" stroke-width="2"/>
+
+  <!-- forehead point 10 -->
+  <circle cx="300" cy="165" r="6" fill="#ffb454"/>
+  <line x1="300" y1="165" x2="440" y2="130" stroke="#6b7680" stroke-width="1"/>
+  <text x="446" y="134" font-family="system-ui, sans-serif" font-size="14" fill="#ffb454" font-weight="600">10 &#8212; forehead</text>
+
+  <!-- chin point 152 -->
+  <circle cx="300" cy="495" r="6" fill="#ffb454"/>
+  <line x1="300" y1="495" x2="440" y2="530" stroke="#6b7680" stroke-width="1"/>
+  <text x="446" y="534" font-family="system-ui, sans-serif" font-size="14" fill="#ffb454" font-weight="600">152 &#8212; chin</text>
+
+  <!-- faceHeight dashed line -->
+  <line x1="230" y1="165" x2="230" y2="495" stroke="#ffb454" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="150" y="335" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#ffb454" transform="rotate(-90 150 335)">faceHeight</text>
+
+  <!-- mouth points 13/14 -->
+  <circle cx="300" cy="400" r="6" fill="#3ddc84"/>
+  <circle cx="300" cy="420" r="6" fill="#4aa3ff"/>
+  <line x1="300" y1="400" x2="440" y2="390" stroke="#6b7680" stroke-width="1"/>
+  <text x="446" y="394" font-family="system-ui, sans-serif" font-size="14" fill="#3ddc84" font-weight="600">13 &#8212; upper inner lip</text>
+  <line x1="300" y1="420" x2="440" y2="440" stroke="#6b7680" stroke-width="1"/>
+  <text x="446" y="444" font-family="system-ui, sans-serif" font-size="14" fill="#4aa3ff" font-weight="600">14 &#8212; lower inner lip</text>
+
+  <!-- mouthGap dashed line -->
+  <line x1="380" y1="400" x2="380" y2="420" stroke="#e6e6e6" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="392" y="415" font-family="system-ui, sans-serif" font-size="12" fill="#e6e6e6">mouthGap</text>
+
+  <!-- formula box -->
+  <rect x="110" y="555" width="500" height="60" rx="10" fill="#132018" stroke="#3ddc84" stroke-width="1.5"/>
+  <text x="360" y="592" text-anchor="middle" font-family="'Courier New', monospace" font-size="17" fill="#3ddc84" font-weight="700">mouthRatio = mouthGap / faceHeight</text>
+</svg>

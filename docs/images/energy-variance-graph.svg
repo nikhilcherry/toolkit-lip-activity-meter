@@ -1,0 +1,26 @@
+<svg width="900" height="460" viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="460" fill="#101418"/>
+  <text x="450" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e6e6e6" font-weight="700">energy = rolling variance of mouthRatio</text>
+
+  <!-- Talking chart -->
+  <g transform="translate(40,55)">
+    <rect width="820" height="170" rx="10" fill="#161d24" stroke="#2c353d" stroke-width="1.5"/>
+    <text x="20" y="26" font-family="system-ui, sans-serif" font-size="14" fill="#3ddc84" font-weight="600">Face A &#8212; talking</text>
+    <text x="800" y="26" text-anchor="end" font-family="'Courier New', monospace" font-size="13" fill="#3ddc84">energy &#8776; 0.0029</text>
+    <polyline points="20,100 40,60 60,140 80,55 100,145 120,58 140,138 160,62 180,142 200,60 220,135 240,65 260,140 280,58 300,145 320,62 340,138 360,60 380,142 400,58 420,140 440,62 460,138 480,60 500,142 520,58 540,140 560,62 580,138 600,60 620,142 640,58 660,140 680,62 700,138 720,60 740,142 760,58 780,138 800,62"
+      fill="none" stroke="#3ddc84" stroke-width="2.5"/>
+    <text x="20" y="158" font-family="system-ui, sans-serif" font-size="11" fill="#6b7680">mouthRatio(t) &#8212; wide swings &#8594; high variance</text>
+  </g>
+
+  <!-- Silent chart -->
+  <g transform="translate(40,255)">
+    <rect width="820" height="170" rx="10" fill="#161d24" stroke="#2c353d" stroke-width="1.5"/>
+    <text x="20" y="26" font-family="system-ui, sans-serif" font-size="14" fill="#4aa3ff" font-weight="600">Face B &#8212; silent</text>
+    <text x="800" y="26" text-anchor="end" font-family="'Courier New', monospace" font-size="13" fill="#4aa3ff">energy &#8776; 0.000005</text>
+    <polyline points="20,100 40,98 60,101 80,99 100,102 120,98 140,100 160,99 180,101 200,100 220,98 240,101 260,99 280,100 300,102 320,98 340,100 360,99 380,101 400,100 420,99 440,101 460,98 480,100 500,99 520,101 540,100 560,99 580,101 600,98 620,100 640,99 660,101 680,100 700,99 720,101 740,98 760,100 780,99 800,101"
+      fill="none" stroke="#4aa3ff" stroke-width="2.5"/>
+    <text x="20" y="158" font-family="system-ui, sans-serif" font-size="11" fill="#6b7680">mouthRatio(t) &#8212; near-flat &#8594; low variance</text>
+  </g>
+
+  <text x="450" y="440" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#6b7680">Same demo data as demo.html &#8212; talking scores roughly 500&#215; higher than silent.</text>
+</svg>

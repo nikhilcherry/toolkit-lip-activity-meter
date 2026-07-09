@@ -1,0 +1,42 @@
+<svg width="900" height="300" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="300" fill="#101418"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#9aa4ad"/>
+    </marker>
+  </defs>
+
+  <!-- Face Tracker box (external, dashed) -->
+  <rect x="30" y="90" width="220" height="120" rx="10" fill="#161d24" stroke="#4aa3ff" stroke-width="2" stroke-dasharray="6,5"/>
+  <text x="140" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="#e6e6e6" font-weight="600">Face Tracker</text>
+  <text x="140" y="163" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4ad">e.g. MediaPipe</text>
+  <text x="140" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4ad">Face Landmarker</text>
+  <text x="140" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6b7680">(external — not in this repo)</text>
+
+  <!-- Arrow 1 -->
+  <line x1="252" y1="150" x2="335" y2="150" stroke="#9aa4ad" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="293" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa4ad">landmarks[478]</text>
+  <text x="293" y="144" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa4ad">per frame</text>
+
+  <!-- LipActivityMeter box (this repo, solid, highlighted) -->
+  <rect x="340" y="70" width="240" height="160" rx="10" fill="#132018" stroke="#3ddc84" stroke-width="2.5"/>
+  <text x="460" y="118" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#e6e6e6" font-weight="700">LipActivityMeter</text>
+  <text x="460" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#3ddc84" font-weight="600">(this repo)</text>
+  <text x="460" y="168" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4ad">update(faceId, landmarks, t)</text>
+  <text x="460" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4ad">rolling mouth-ratio variance</text>
+  <text x="460" y="212" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6b7680">no camera · no MediaPipe import</text>
+
+  <!-- Arrow 2 -->
+  <line x1="582" y1="150" x2="665" y2="150" stroke="#9aa4ad" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="623" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa4ad">getAllEnergies()</text>
+  <text x="623" y="144" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9aa4ad">Map&lt;faceId,energy&gt;</text>
+
+  <!-- AttributionFuser box (external, dashed) -->
+  <rect x="670" y="90" width="200" height="120" rx="10" fill="#161d24" stroke="#4aa3ff" stroke-width="2" stroke-dasharray="6,5"/>
+  <text x="770" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="#e6e6e6" font-weight="600">AttributionFuser</text>
+  <text x="770" y="163" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4ad">attributes speech to</text>
+  <text x="770" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#9aa4ad">the correct face</text>
+  <text x="770" y="228" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6b7680">(external — not in this repo)</text>
+
+  <text x="450" y="270" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#6b7680">Each tool works standalone and is testable on its own — composition is optional.</text>
+</svg>
