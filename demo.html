@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>LipActivityMeter Demo</title>
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    background: #101418;
+    color: #e6e6e6;
+    max-width: 640px;
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+  h1 { font-size: 1.3rem; }
+  p.hint { color: #9aa4ad; font-size: 0.9rem; }
+  .face-row {
+    margin: 24px 0;
+  }
+  .face-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+  .bar-track {
+    background: #1e252b;
+    border-radius: 6px;
+    height: 28px;
+    overflow: hidden;
+    border: 1px solid #2c353d;
+  }
+  .bar-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 60ms linear;
+  }
+  #barA { background: linear-gradient(90deg, #3ddc84, #1fae63); }
+  #barB { background: linear-gradient(90deg, #4aa3ff, #2a72c9); }
+  button {
+    margin-top: 16px;
+    background: #2c353d;
+    color: #e6e6e6;
+    border: 1px solid #3a444d;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  button:hover { background: #3a444d; }
+  code { background: #1e252b; padding: 2px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+  <h1>LipActivityMeter — synthetic demo</h1>
+  <p class="hint">
+    Two synthetic faces, no camera. Face A's mouth ratio oscillates like speech;
+    Face B only jitters slightly. Bars show live rolling energy (mouth-ratio variance).
+  </p>
+
+  <div class="face-row">
+    <div class="face-label">
+      <span>Face A — talking</span>
+      <span id="energyA">0.000000</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="barA"></div></div>
+  </div>
+
+  <div class="face-row">
+    <div class="face-label">
+      <span>Face B — silent</span>
+      <span id="energyB">0.000000</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="barB"></div></div>
+  </div>
+
+  <button id="toggleBtn">Pause</button>
+
+  <p class="hint">
+    Edge case sanity check (open devtools console): the meter instance is exposed as
+    <code>window.meter</code>. Try <code>meter.update('A', undefined, performance.now())</code>
+    then <code>meter.getEnergy('A')</code> — it returns <code>0</code> without throwing.
+  </p>
+
+  <script type="module">
+    import { LipActivityMeter } from './lip-activity-meter.js';
+
+    const meter = new LipActivityMeter({ windowSize: 12, minFaceHeight: 0.05 });
+    window.meter = meter; // exposed for manual console edge-case testing
+
+    const FACE_HEIGHT = 0.4; // normalized forehead-to-chin distance
+    const FOREHEAD_Y = 0.2;
+    const CHIN_Y = FOREHEAD_Y + FACE_HEIGHT;
+    const LIP_CENTER_Y = FOREHEAD_Y + FACE_HEIGHT / 2;
+
+    /**
+     * Builds a synthetic 478-point landmark array with only the four
+     * landmarks LipActivityMeter actually reads populated meaningfully.
+     * @param {number} mouthGap - inner-lip vertical gap, normalized units.
+     * @returns {{x:number,y:number,z:number}[]}
+     */
+    function makeLandmarks(mouthGap) {
+      const landmarks = new Array(478).fill(null).map(() => ({ x: 0, y: 0, z: 0 }));
+      landmarks[10] = { x: 0.5, y: FOREHEAD_Y, z: 0 };   // forehead
+      landmarks[152] = { x: 0.5, y: CHIN_Y, z: 0 };       // chin
+      landmarks[13] = { x: 0.5, y: LIP_CENTER_Y - mouthGap / 2, z: 0 }; // upper inner lip
+      landmarks[14] = { x: 0.5, y: LIP_CENTER_Y + mouthGap / 2, z: 0 }; // lower inner lip
+      return landmarks;
+    }
+
+    function randomInRange(min, max) {
+      return min + Math.random() * (max - min);
+    }
+
+    let paused = false;
+    let lastFrameTime = 0;
+    const FRAME_INTERVAL_MS = 1000 / 30;
+
+    const energyAEl = document.getElementById('energyA');
+    const energyBEl = document.getElementById('energyB');
+    const barAEl = document.getElementById('barA');
+    const barBEl = document.getElementById('barB');
+    const toggleBtn = document.getElementById('toggleBtn');
+
+    const BAR_DISPLAY_SCALE = 15000; // maps typical energy range onto 0-100% width
+
+    function renderBar(barEl, labelEl, energy) {
+      labelEl.textContent = energy.toFixed(6);
+      const widthPct = Math.min(100, energy * BAR_DISPLAY_SCALE);
+      barEl.style.width = widthPct + '%';
+    }
+
+    function frame(now) {
+      requestAnimationFrame(frame);
+      if (paused) return;
+      if (now - lastFrameTime < FRAME_INTERVAL_MS) return;
+      lastFrameTime = now;
+
+      const t = now / 1000;
+
+      // Face A: speech-like oscillation (sine carrier + noise).
+      const talkGap = 0.04 + 0.03 * Math.sin(t * 2 * Math.PI * 2.2) + randomInRange(-0.003, 0.003);
+      meter.update('A', makeLandmarks(Math.max(0.001, talkGap)), now);
+
+      // Face B: near-silent, tiny jitter only.
+      const silentGap = 0.02 + randomInRange(-0.002, 0.002);
+      meter.update('B', makeLandmarks(Math.max(0.001, silentGap)), now);
+
+      renderBar(barAEl, energyAEl, meter.getEnergy('A'));
+      renderBar(barBEl, energyBEl, meter.getEnergy('B'));
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      paused = !paused;
+      toggleBtn.textContent = paused ? 'Resume' : 'Pause';
+    });
+
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>
