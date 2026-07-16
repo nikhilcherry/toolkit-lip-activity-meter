@@ -152,3 +152,42 @@ test('prune is a strict less-than comparison -- a face updated exactly at the cu
   meter.prune(500);
   assert.equal(meter.getAllEnergies().has('A'), true);
 });
+
+test('a NaN landmark coordinate resets the score instead of poisoning the window', () => {
+  const meter = new LipActivityMeter({ windowSize: 4 });
+  meter.update('A', openMouth(0.1), 0);
+  meter.update('A', openMouth(0.3), 33);
+  // tracking glitch: a landmark goes NaN for one frame
+  meter.update('A', landmarks({ upperLip: { x: 0.5, y: NaN }, lowerLip: { x: 0.5, y: 0.5 } }), 66);
+  assert.equal(meter.getEnergy('A'), 0, 'glitch frame resets energy to 0');
+  assert.equal(meter.getMouthRatio('A'), 0);
+
+  // recovery: real frames afterwards must produce finite energy again
+  meter.update('A', openMouth(0.1), 99);
+  meter.update('A', openMouth(0.3), 132);
+  assert.ok(Number.isFinite(meter.getEnergy('A')), 'energy must be finite after recovery');
+  assert.ok(meter.getEnergy('A') > 0);
+});
+
+test('a zero face height (coincident forehead/chin) reports 0 instead of NaN', () => {
+  const meter = new LipActivityMeter({ minFaceHeight: 0 });
+  const degenerate = landmarks({
+    forehead: { x: 0.5, y: 0.5 },
+    chin: { x: 0.5, y: 0.5 },
+    upperLip: { x: 0.5, y: 0.5 },
+    lowerLip: { x: 0.5, y: 0.5 },
+  });
+  meter.update('A', degenerate, 0);
+  assert.equal(meter.getMouthRatio('A'), 0);
+  assert.equal(meter.getEnergy('A'), 0);
+});
+
+test('reset() forgets every tracked face', () => {
+  const meter = new LipActivityMeter();
+  meter.update('A', openMouth(0.1), 0);
+  meter.update('B', openMouth(0.2), 0);
+  meter.reset();
+  assert.equal(meter.getAllEnergies().size, 0);
+  assert.equal(meter.getEnergy('A'), 0);
+  assert.equal(meter.getMouthRatio('B'), 0);
+});

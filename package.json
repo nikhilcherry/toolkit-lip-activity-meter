@@ -1,0 +1,11 @@
+{
+  "name": "toolkit-lip-activity-meter",
+  "version": "1.0.0",
+  "description": "Speaking-likelihood scorer over face landmark arrays — rolling variance of the mouth-open ratio, no camera or detection of its own.",
+  "type": "module",
+  "main": "lip-activity-meter.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}

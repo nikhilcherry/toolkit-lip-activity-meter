@@ -84,7 +84,7 @@ export class LipActivityMeter {
     }
 
     const faceHeight = this._distance(landmarks[LANDMARK_FOREHEAD], landmarks[LANDMARK_CHIN]);
-    if (faceHeight < this._minFaceHeight) {
+    if (faceHeight <= 0 || faceHeight < this._minFaceHeight) {
       state.mouthRatio = 0;
       state.energy = 0;
       return;
@@ -152,6 +152,14 @@ export class LipActivityMeter {
   }
 
   /**
+   * Forgets every tracked face, e.g. when the camera session restarts.
+   * @returns {void}
+   */
+  reset() {
+    this._faces.clear();
+  }
+
+  /**
    * @param {Landmark[]} landmarks
    * @returns {boolean}
    * @private
@@ -162,7 +170,10 @@ export class LipActivityMeter {
     }
     return REQUIRED_LANDMARK_INDICES.every((index) => {
       const point = landmarks[index];
-      return point && typeof point.x === 'number' && typeof point.y === 'number';
+      // Number.isFinite (not just typeof) matters: a single NaN coordinate
+      // would otherwise poison the rolling window, reporting NaN energy for
+      // the next windowSize frames.
+      return point && Number.isFinite(point.x) && Number.isFinite(point.y);
     });
   }
 

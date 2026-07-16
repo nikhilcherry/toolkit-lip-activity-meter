@@ -83,7 +83,8 @@ Records one frame of landmark data for `faceId`. Never throws:
 
 - Unknown/new `faceId` — starts tracking it.
 - `landmarks` undefined, not an array, or missing the four required points — resets that face's ratio/energy to `0` for this frame.
-- Face height below `minFaceHeight` — energy reported as `0`.
+- Any required landmark with a non-finite (`NaN`/`Infinity`) coordinate — treated as missing, so one tracking glitch can't poison the rolling window with `NaN` energy.
+- Face height below `minFaceHeight` (or zero) — energy reported as `0`.
 
 ### `getEnergy(faceId)` / `getMouthRatio(faceId)`
 
@@ -97,6 +98,10 @@ Returns a `Map<faceId, energy>` snapshot for every currently tracked face.
 
 Drops any tracked face whose last `update()` call was before `olderThanMs` —
 useful for forgetting faces that left the frame.
+
+### `reset()`
+
+Forgets every tracked face at once, e.g. when the camera session restarts.
 
 ## Demo
 
