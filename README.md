@@ -129,3 +129,16 @@ meter.getEnergy('A'); // 0, no throw
   per-frame `landmarks` array this tool consumes.
 - **AttributionFuser** — consumes `meter.getAllEnergies()` to attribute
   detected speech to the correct on-screen face.
+
+## Tests
+
+```bash
+node --test
+```
+
+Zero DOM/network dependency end to end, so the suite drives the real
+public API directly with synthetic landmark data: ratio math, the
+never-throws contract on malformed input, the small-face cutoff,
+`windowSize` rolling-history truncation, `prune()`, and an end-to-end
+"talking vs. silent" energy comparison matching the demo's own sanity
+check. No dependencies to install; Node's built-in test runner is enough.
