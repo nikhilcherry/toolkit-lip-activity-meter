@@ -2,6 +2,12 @@
 
 ![LipActivityMeter](docs/images/banner.svg)
 
+<p align="center">
+  <img alt="js" src="https://img.shields.io/badge/JavaScript-zero_dependencies-F7DF1E">
+  <img alt="mediapipe" src="https://img.shields.io/badge/input-MediaPipe_landmarks-4285F4">
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-green">
+</p>
+
 A standalone, zero-dependency browser tool that turns per-frame face landmark
 arrays into a "speaking likelihood" score per face.
 
@@ -142,3 +148,7 @@ never-throws contract on malformed input, the small-face cutoff,
 `windowSize` rolling-history truncation, `prune()`, and an end-to-end
 "talking vs. silent" energy comparison matching the demo's own sanity
 check. No dependencies to install; Node's built-in test runner is enough.
+
+## License
+
+MIT
